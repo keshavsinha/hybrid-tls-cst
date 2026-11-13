@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+servers/rustsrv/target/
+servers/gosrv/gosrv*
+servers/gosrv_go124/gosrv*
+servers/wolfsrv/wolfsrv
+servers/wolfsrv/wolfsrv_master
+servers/s2nsrv/s2nsrv

@@ -1,0 +1,84 @@
+== verdict counts (effective = not UNSUPPORTED/CLIENT_PREF; invalid = oracle says reject)
+openssl-4.0.3            t2  n=  24 eff=  21 eff_invalid=  19 {'CLIENT_PREF': 3, 'OK': 21}
+openssl-4.0.3            t3  n=  90 eff=  81 eff_invalid=  77 {'CLIENT_PREF': 9, 'OK': 81}
+openssl-4.0.3            exh n=1728 eff=1440 eff_invalid=1400 {'CLIENT_PREF': 288, 'OK': 1440}
+go1.26.9                 t2  n=  24 eff=  24 eff_invalid=  22 {'OK': 24}
+go1.26.9                 t3  n=  90 eff=  90 eff_invalid=  86 {'OK': 90}
+go1.26.9                 exh n=1728 eff=1728 eff_invalid=1680 {'OK': 1728}
+boringssl-6c69fa8        t2  n=  24 eff=  12 eff_invalid=  10 {'OK': 12, 'UNSUPPORTED': 12}
+boringssl-6c69fa8        t3  n=  90 eff=  38 eff_invalid=  36 {'OK': 38, 'UNSUPPORTED': 52}
+boringssl-6c69fa8        exh n=1728 eff= 576 eff_invalid= 552 {'OK': 576, 'UNSUPPORTED': 1152}
+rustls-0.23.46           t2  n=  24 eff=  15 eff_invalid=  14 {'CLIENT_PREF': 3, 'OK': 15, 'UNSUPPORTED': 6}
+rustls-0.23.46           t3  n=  90 eff=  52 eff_invalid=  49 {'CLIENT_PREF': 13, 'OK': 52, 'UNSUPPORTED': 25}
+rustls-0.23.46           exh n=1728 eff= 768 eff_invalid= 744 {'CLIENT_PREF': 384, 'OK': 768, 'UNSUPPORTED': 576}
+botan-f1d805c            t2  n=  24 eff=  24 eff_invalid=  22 {'OK': 24}
+botan-f1d805c            t3  n=  90 eff=  90 eff_invalid=  86 {'OK': 90}
+botan-f1d805c            exh n=1728 eff=1728 eff_invalid=1680 {'OK': 1728}
+nss-5cd24fd              t2  n=  24 eff=  24 eff_invalid=  22 {'OK': 24}
+nss-5cd24fd              t3  n=  90 eff=  90 eff_invalid=  86 {'OK': 90}
+nss-5cd24fd              exh n=1728 eff=1728 eff_invalid=1680 {'OK': 1728}
+wolfssl-5.9.4            t2  n=  24 eff=  24 eff_invalid=  22 {'NO_ALERT': 10, 'OK': 14}
+wolfssl-5.9.4            t3  n=  90 eff=  90 eff_invalid=  86 {'NO_ALERT': 39, 'OK': 51}
+wolfssl-5.9.4            exh n=1728 eff=1728 eff_invalid=1680 {'NO_ALERT': 704, 'OK': 1024}
+wolfssl-master-c76acb6   t2  n=  24 eff=  24 eff_invalid=  22 {'OK': 24}
+wolfssl-master-c76acb6   t3  n=  90 eff=  90 eff_invalid=  86 {'OK': 90}
+wolfssl-master-c76acb6   exh n=1728 eff=1728 eff_invalid=1680 {'OK': 1728}
+s2n-tls-0369861          t2  n=  24 eff=  24 eff_invalid=  22 {'DUP_ACCEPT': 4, 'HRR_SAME_GROUP': 12, 'LATE_ABORT': 1, 'NO_RESPONSE': 5, 'OK': 2}
+s2n-tls-0369861          t3  n=  90 eff=  90 eff_invalid=  86 {'DUP_ACCEPT': 20, 'HRR_SAME_GROUP': 45, 'LATE_ABORT': 2, 'NO_RESPONSE': 19, 'OK': 4}
+s2n-tls-0369861          exh n=1728 eff=1728 eff_invalid=1680 {'DUP_ACCEPT': 440, 'HRR_SAME_GROUP': 880, 'LATE_ABORT': 24, 'NO_RESPONSE': 336, 'OK': 48}
+go1.26.9-seededfault     t2  n=  24 eff=  24 eff_invalid=  22 {'FAIL_OPEN': 3, 'OK': 21}
+go1.26.9-seededfault     t3  n=  90 eff=  90 eff_invalid=  86 {'FAIL_OPEN': 14, 'OK': 76}
+go1.26.9-seededfault     exh n=1728 eff=1728 eff_invalid=1680 {'FAIL_OPEN': 266, 'OK': 1462}
+
+== seeded fault: FAIL_OPEN rate by factor value (exhaustive)
+p = 0.1539 (266/1728)
+  group     {'X25519MLKEM768': '192/576', 'SecP256r1MLKEM768': '36/576', 'SecP384r1MLKEM1024': '38/576'}
+  pq_mut    {'none': '36/288', 'coef_q_first': '72/288', 'coef_q_last': '72/288', 'coef_4095_mid': '72/288', 'truncate': '0/288', 'extend': '14/288'}
+  ec_mut    {'none': '156/432', 'zero': '48/432', 'bad_point': '48/432', 'truncate': '14/432'}
+  order     {'correct': '110/864', 'swapped': '156/864'}
+  extra     {'none': '89/576', 'x25519_fallback': '89/576', 'duplicate_group': '88/576'}
+  sg_order  {'hybrid_first': '133/864', 'classical_first': '133/864'}
+  split     {'no': '133/864', 'yes': '133/864'}
+  coefficient mutations: fail-open only when ec_mut=none and (order=correct or ... ):
+    ('bad_point', 'correct', False, False) 72
+    ('bad_point', 'correct', True, False) 36
+    ('bad_point', 'swapped', False, False) 72
+    ('bad_point', 'swapped', True, True) 36
+    ('none', 'correct', False, True) 72
+    ('none', 'correct', True, True) 36
+    ('none', 'swapped', False, False) 72
+    ('none', 'swapped', True, True) 36
+    ('truncate', 'correct', False, False) 72
+    ('truncate', 'correct', True, False) 36
+    ('truncate', 'swapped', False, False) 72
+    ('truncate', 'swapped', True, False) 36
+    ('zero', 'correct', False, False) 72
+    ('zero', 'correct', True, False) 36
+    ('zero', 'swapped', False, False) 72
+    ('zero', 'swapped', True, True) 36
+
+== simulated random baseline from the exhaustive lookup (seeded fault)
+  n=24: miss rate 0.0199 (analytic 0.0181); mean hits 3.68; 2-way cov 0.868; 3-way cov 0.534
+  n=90: miss rate 0.0000 (analytic 0.0000); mean hits 13.85; 2-way cov 0.996; 3-way cov 0.900
+  covering array t=2: 3/24 fail-open
+  covering array t=3: 14/90 fail-open
+
+== wolfSSL 5.9.4 (exhaustive): NO_ALERT by factor value, invalid shares only
+  invalid 1680, NO_ALERT 704
+  ec_mut  {'none': '200/396', 'zero': '128/432', 'bad_point': '128/432', 'truncate': '248/420'}
+  extra   {'none': '352/560', 'x25519_fallback': '352/560', 'duplicate_group': '0/560'}
+  order   {'correct': '336/816', 'swapped': '368/864'}
+  group   {'X25519MLKEM768': '304/552', 'SecP256r1MLKEM768': '200/564', 'SecP384r1MLKEM1024': '200/564'}
+  pq_mut  {'none': '72/252', 'coef_q_first': '96/288', 'coef_q_last': '96/288', 'coef_4095_mid': '96/288', 'truncate': '192/288', 'extend': '152/276'}
+  by reason: Counter({('mlkem_modulus', 'OK'): 640, ('length', 'NO_ALERT'): 528, ('length', 'OK'): 264, ('mlkem_modulus', 'NO_ALERT'): 176, ('x25519_low_order', 'OK'): 24, ('ec_not_uncompressed', 'OK'): 24, ('ec_off_curve', 'OK'): 24})
+
+== s2n-tls (exhaustive)
+   [(('HRR_SAME_GROUP', 'length'), 528), (('NO_RESPONSE', 'mlkem_modulus'), 336), (('HRR_SAME_GROUP', 'mlkem_modulus'), 320), (('DUP_ACCEPT', 'length'), 264), (('DUP_ACCEPT', 'mlkem_modulus'), 160), (('OK', 'ok'), 48), (('LATE_ABORT', 'x25519_low_order'), 24), (('HRR_SAME_GROUP', 'ec_not_uncompressed'), 16), (('HRR_SAME_GROUP', 'ec_off_curve'), 16), (('DUP_ACCEPT', 'ec_not_uncompressed'), 8), (('DUP_ACCEPT', 'ec_off_curve'), 8)]
+   DUP_ACCEPT detail: Counter({'SecP256r1MLKEM768+flight:dup': 176, 'SecP384r1MLKEM1024+flight:dup': 176, 'X25519MLKEM768+flight:dup': 88})
+
+== rustls: valid hybrid share with classical-first preference (exhaustive)
+   Counter({('classical_first', 'none', 'HRR', 'X25519'): 6, ('classical_first', 'x25519_fallback', 'SH', 'X25519'): 6, ('hybrid_first', 'duplicate_group', 'ALERT', 'illegal_parameter'): 6, ('classical_first', 'duplicate_group', 'ALERT', 'illegal_parameter'): 6, ('hybrid_first', 'none', 'SH', 'X25519MLKEM768'): 4, ('hybrid_first', 'x25519_fallback', 'SH', 'X25519MLKEM768'): 4, ('hybrid_first', 'none', 'SH', 'SecP256r1MLKEM768'): 2, ('hybrid_first', 'x25519_fallback', 'SH', 'SecP256r1MLKEM768'): 2})
+
+== CLOSE details
+  wolfssl-5.9.4 t3: {'fin': 39}
+  wolfssl-5.9.4 exh: {'fin': 704}

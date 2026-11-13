@@ -1,0 +1,1 @@
+trials 1000, valid 0, mean 143.1, 5th pct 126, 95th pct 163, min 108, max 179

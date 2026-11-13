@@ -1,0 +1,15 @@
+diff --git a/src/crypto/internal/fips140/mlkem/field.go b/src/crypto/internal/fips140/mlkem/field.go
+index 5770625..0fbe346 100644
+--- a/src/crypto/internal/fips140/mlkem/field.go
++++ b/src/crypto/internal/fips140/mlkem/field.go
+@@ -15,8 +15,8 @@ type fieldElement uint16
+ 
+ // fieldCheckReduced checks that a value a is < q.
+ func fieldCheckReduced(a uint16) (fieldElement, error) {
+-	if a >= q {
+-		return 0, errors.New("unreduced field element")
++	if a >= q { // SEEDED FAULT: silently reduce instead of rejecting
++		return fieldElement(a % q), nil
+ 	}
+ 	return fieldElement(a), nil
+ }

@@ -1,0 +1,4 @@
+allow_tls12=false
+allow_tls13=true
+key_exchange_groups=x25519/ML-KEM-768 secp256r1/ML-KEM-768 secp384r1/ML-KEM-1024 x25519
+key_exchange_groups_to_offer=x25519/ML-KEM-768

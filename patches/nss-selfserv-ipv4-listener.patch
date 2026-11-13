@@ -1,0 +1,13 @@
+diff --git a/cmd/selfserv/selfserv.c b/cmd/selfserv/selfserv.c
+index c6c1e96..6c78916 100644
+--- a/cmd/selfserv/selfserv.c
++++ b/cmd/selfserv/selfserv.c
+@@ -1796,7 +1796,7 @@ getBoundListenSocket(unsigned short port)
+     // tstclnt uses PR_GetPrefLoopbackAddrInfo to decide, if it's
+     // asked to connect to localhost.
+ 
+-    prStatus = PR_GetPrefLoopbackAddrInfo(&addr, port);
++    prStatus = PR_FAILURE; /* HARNESS PATCH: IPv4 only (no IPv6 in container) */
+     if (prStatus == PR_FAILURE) {
+         addr.inet.family = PR_AF_INET;
+         addr.inet.ip = PR_htonl(PR_INADDR_ANY);
